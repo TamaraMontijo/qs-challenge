@@ -6,12 +6,15 @@ const nextConfig: NextConfig = {
     defaultLocale: 'en-US',
     localeDetection: false,
   },
+  images: {
+    domains: ['preodemo.gumlet.io'],  
+  },
   reactStrictMode: true,
   async rewrites() {
     return [
       {
-        source: '/api/venue/9',  // Rota proxy local (ajuste conforme necessário)
-        destination: 'https://cdn-dev.preoday.com/challenge/venue/9',  // Rota da API real
+        source: '/api/venue/9',  
+        destination: 'https://cdn-dev.preoday.com/challenge/venue/9',  
       },
       {
         source: '/api/menu',  

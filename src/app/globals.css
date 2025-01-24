@@ -18,7 +18,23 @@
 }
 
 body {
+  @apply font-sans font-normal;
+  @apply text-sm;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* Adicionando pesos personalizados conforme necessário */
+.font-light {
+  font-weight: 300;
+}
+.font-regular {
+  font-weight: 400;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-bold {
+  font-weight: 700;
 }

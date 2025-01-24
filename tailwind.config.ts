@@ -9,6 +9,18 @@ export default {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				sans: ['var(--font-roboto)', 'sans-serif'],
+			},
+			fontSize: {
+				sm: '16px', 
+				base: '18px', 
+				lg: '24px', 
+			},
+			letterSpacing: {
+				wide: '0.03em', // ~0.5px
+				wider: '0.045em', // ~0.75px 
+			  },
 			colors: {
 				primary: 'var(--primary-colour)',
 				primaryHover: 'var(--primary-colour-hover)',

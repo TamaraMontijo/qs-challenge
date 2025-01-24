@@ -16,7 +16,6 @@ export function useTheme() {
     async function fetchTheme() {
       try {
         const restaurantData = await getRestaurantDetails();
-        console.log('restaurantData', restaurantData)
         const themeSettings = restaurantData.webSettings;
 
         setTheme({
