@@ -1,0 +1,24 @@
+:root {
+    --primary-colour: #4f372f;
+    --primary-colour-hover: #4f372f;
+    --background-colour: #ffffff;
+    --nav-background-colour: #4f372f;
+  }
+  
+  body {
+    background-color: var(--background-colour);
+    color: var(--primary-colour);
+  }
+  
+  .navbar {
+    background-color: var(--nav-background-colour);
+  }
+  
+  .button {
+    background-color: var(--primary-colour);
+  }
+  
+  .button:hover {
+    background-color: var(--primary-colour-hover);
+  }
+  
