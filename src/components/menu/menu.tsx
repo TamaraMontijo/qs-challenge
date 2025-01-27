@@ -48,7 +48,7 @@ export default function Menu() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
     return (
-        <div className="menu bg-white shadow-[0_2px_14px_0px_#00000024]">
+        <div className="menu bg-white shadow-[0_2px_14px_0px_#00000024] w-full">
             <Carousel />
             <div className="flex flex-col p-4">
                 {menuData.map((section, index) => (

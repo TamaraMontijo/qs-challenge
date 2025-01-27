@@ -32,7 +32,7 @@ export default function ItemModal() {
                 </div>
                 <ModifierGroup />
                 <div className="flex flex-col justify-center items-center pt-2 pb-6 px-6 gap-2">
-                    <CounterButton />
+                    <CounterButton quantity={0} />
                     <CTAButton />
 
                 </div>
