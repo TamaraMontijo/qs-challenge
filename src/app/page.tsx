@@ -21,7 +21,6 @@ export default function Home() {
             <BasketCard />
           </div>
         </div>
-
       </main>
     </>
   );

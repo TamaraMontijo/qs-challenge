@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/utils/themeProvider";
-
 import { Roboto } from 'next/font/google';
+import { ThemeProvider } from "@/utils/themeProvider";
+import ReduxProvider from "@/utils/reduxProvider";
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -10,8 +10,7 @@ const roboto = Roboto({
   variable: '--font-roboto',
 });
 
-
-
+// Mantemos o metadata no Server Component
 export const metadata: Metadata = {
   title: "QuikServe Frontend Challenge",
   description: "whitelabel application for restaurants",
@@ -25,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.variable}>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ReduxProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

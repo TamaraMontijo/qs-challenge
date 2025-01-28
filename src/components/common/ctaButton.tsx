@@ -1,21 +1,48 @@
-/* components/CTAButton.jsx */
+"use client";
 
-export default function CTAButton() {
-    return (
-      <button className="flex flex-row justify-center items-center px-6 py-1 gap-2 w-[345px] h-12 bg-primary rounded-[40px]">
-        {/* Your Order */}
-        <span className="flex items-center text-center text-[18px] leading-[21px] font-medium text-white tracking-[0.75px]">
-          Your Order
-        </span>
-        {/* (3 items) */}
-        <span className="flex items-center text-right text-[18px] leading-[21px] font-medium text-white tracking-[0.75px]">
-          (3 items)
-        </span>
-        {/* Price */}
-        <span className="flex items-center text-center text-[18px] leading-[21px] font-medium text-white tracking-[0.75px]">
-          $60
-        </span>
-      </button>
-    );
-  }
-  
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation"; // Usado para redirecionar
+import { RootState } from "@/store/store";
+import { addItem } from "@/store/slice/basketSlice";
+
+interface CTAButtonProps {
+  itemId: number; // ID do item
+  itemName: string; // Nome do item
+  itemPrice: number; // Preço do item
+  quantity: number; // Quantidade selecionada
+  buttonText?: string; // Texto dinâmico do botão
+  redirectTo?: string; // Rota para redirecionar após clique
+}
+
+export default function CTAButton({
+  itemId,
+  itemName,
+  itemPrice,
+  quantity,
+  buttonText = "Add To Cart",
+  redirectTo,
+}: CTAButtonProps) {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleClick = () => {
+    // Adiciona o item ao carrinho com a quantidade selecionada
+    dispatch(addItem({ id: itemId, name: itemName, price: itemPrice, quantity }));
+
+    // Redireciona para a página especificada, se fornecida
+    if (redirectTo) {
+      router.push(redirectTo);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      className="flex flex-row justify-center items-center px-6 py-1 gap-2 w-[345px] h-12 bg-primary rounded-[40px]"
+    >
+      <span className="text-[18px] font-medium text-white tracking-[0.75px]">
+        {buttonText}
+      </span>
+    </button>
+  );
+}

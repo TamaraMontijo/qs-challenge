@@ -1,6 +1,6 @@
 interface ModifierOptionProps {
     title: string,
-    price: string,
+    price: number,
     isActive: boolean,
     onClick: () => void;
 }
@@ -11,7 +11,7 @@ export default function ModifierOption({ title, price, isActive, onClick }: Modi
         <div className="flex flex-col justify-center items-start gap-1 w-[305px] h-[40px]">
           <span className="text-[#121212] text-[16px] font-medium leading-[19px]">{title}</span>
           <div className="flex flex-row items-start gap-4 w-[59px] h-[19px]">
-            <span className="text-[#464646] text-[16px] font-normal leading-[19px]">{price}</span>
+            <span className="text-[#464646] text-[16px] font-normal leading-[19px]">R${price.toFixed(2)}</span>
           </div>
         </div>
         <div className="flex flex-row justify-end items-center gap-4 w-[305px] h-[1px]">

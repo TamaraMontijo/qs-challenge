@@ -8,6 +8,7 @@ type MenuItem = {
     description: string;
     price: string;
     image: string;
+    id: number;
 };
 
 type MenuSectionData = {
@@ -32,6 +33,7 @@ export default function Menu() {
                         description: item.description || "",
                         price: `R$${item.price.toFixed(2)}`,
                         image: item.images?.[0]?.image || "",
+                        id: item.id
                     })),
                 }));
                 setMenuData(transformedData);
