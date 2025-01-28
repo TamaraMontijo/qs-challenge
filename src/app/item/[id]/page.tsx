@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useParams, useRouter } from "next/navigation";
-import { RootState } from "@/store/store";
 import { toast } from "@/hooks/use-toast";
 import { getMenuDetails } from "@/services/menuService";
 import CounterButton from "@/components/common/counterButton";
 import CTAButton from "@/components/common/ctaButton";
+import ModifierGroup, { ModifierGroupData } from "@/components/item/modifierGroup";
 
 type RouteParams = {
   id: string;
@@ -19,7 +18,7 @@ interface MenuItem {
   description: string;
   price: number;
   images?: { image: string }[];
-  modifiers?: any; // Substitua `any` com a tipagem correta
+  modifiers?: ModifierGroupData[];
 }
 
 type ItemState = MenuItem | null;
@@ -31,12 +30,7 @@ export default function ItemModal() {
   const [itemData, setItemData] = useState<ItemState>(null);
   const [quantity, setQuantity] = useState(1);
 
-  // Pega o estado do Redux
-  const basketItem = useSelector((state: RootState) =>
-    state.basket.items.find((item) => item.id === itemId)
-  );
-
-  const totalPrice = (itemData?.price || 0) * quantity;
+  const [selectedModifiers, setSelectedModifiers] = useState<{ id: number; name: string; price: number }[]>([]);
 
   useEffect(() => {
     const fetchItemDetails = async () => {
@@ -63,12 +57,16 @@ export default function ItemModal() {
     return <div>Loading...</div>;
   }
 
+  const basePrice = itemData.price;
+  const modifiersPrice = selectedModifiers.reduce((acc, modifier) => acc + modifier.price, 0);
+  const totalPrice = (basePrice + modifiersPrice) * quantity;
+
   return (
     <div className="md:fixed md:inset-0 md:flex md:justify-center md:items-center md:bg-black md:bg-opacity-65 md:z-50">
       <div className="relative w-full md:max-w-[600px] bg-white shadow-lg">
         <button
           className="absolute top-4 right-4 w-[28px] h-[28px] bg-white shadow-md rounded-full flex justify-center items-center"
-          onClick={() => router.push("/")} // Redireciona para o menu
+          onClick={() => router.push("/")} 
         >
           <svg
             width="12"
@@ -104,6 +102,15 @@ export default function ItemModal() {
             </span>
           </div>
         </div>
+
+        {/* ModifierGroup */}
+        {itemData.modifiers && (
+          <ModifierGroup
+            modifiers={itemData.modifiers}
+            selectedModifiers={selectedModifiers}
+            setSelectedModifiers={setSelectedModifiers}
+          />
+        )}
         <div className="flex flex-col justify-center items-center pt-2 pb-6 px-6 gap-2">
           <CounterButton
             itemId={itemData.id}
