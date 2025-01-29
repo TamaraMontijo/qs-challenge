@@ -7,6 +7,7 @@ import { getMenuDetails } from "@/services/menuService";
 import CounterButton from "@/components/common/counterButton";
 import CTAButton from "@/components/common/ctaButton";
 import ModifierGroup, { ModifierGroupData } from "@/components/item/modifierGroup";
+import { motion } from "framer-motion";
 
 type RouteParams = {
   id: string;
@@ -29,14 +30,12 @@ export default function ItemModal() {
   const itemId = parseInt(params.id, 10);
   const [itemData, setItemData] = useState<ItemState>(null);
   const [quantity, setQuantity] = useState(1);
-
   const [selectedModifiers, setSelectedModifiers] = useState<{ id: number; name: string; price: number }[]>([]);
 
   useEffect(() => {
     const fetchItemDetails = async () => {
       try {
         const menu = await getMenuDetails();
-
         const foundItem = menu.sections
           .flatMap((section: { items: any }) => section.items)
           .find((item: { id: number }) => item.id === itemId);
@@ -46,10 +45,9 @@ export default function ItemModal() {
         toast({
           title: `Error: ${error}`,
           description: "Failed to fetch item details",
-      });
+        });
       }
     };
-
     fetchItemDetails();
   }, [itemId]);
 
@@ -66,8 +64,12 @@ export default function ItemModal() {
   const totalPrice = (basePrice + modifiersPrice) * quantity;
 
   return (
-    <div className="md:fixed md:inset-0 md:flex md:justify-center md:items-center md:bg-black md:bg-opacity-65 md:z-50">
-      <div className="relative w-full md:max-w-[600px] bg-white shadow-lg">
+    <div className="fixed inset-x-0 bottom-0 md:fixed md:inset-0 md:flex md:justify-center md:items-center md:bg-black md:bg-opacity-65 md:z-50">
+      <motion.div 
+        initial={{ y: 100, opacity: 0 }} 
+        animate={{ y: 0, opacity: 1 }} 
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="relative w-full md:max-w-[600px] bg-white shadow-lg md:rounded-lg">
         <button
           className="absolute top-4 right-4 w-[28px] h-[28px] bg-white shadow-md rounded-full flex justify-center items-center"
           onClick={() => router.push("/")}
@@ -88,12 +90,12 @@ export default function ItemModal() {
           </svg>
         </button>
         <div className="flex flex-col items-center p-0 bg-[#DADADA] shadow-md">
-          <div
-            className="w-full h-[265px] bg-cover bg-center"
-            style={{
-              backgroundImage: `url('${itemData.images?.[0]?.image || ""}')`,
-            }}
-          ></div>
+          {itemData.images?.[0]?.image && (
+            <div
+              className="w-full h-[265px] bg-cover bg-center"
+              style={{ backgroundImage: `url('${itemData.images[0].image}')` }}
+            ></div>
+          )}
           <div className="flex flex-col items-start p-4 gap-2.5 w-full bg-white">
             <div className="text-[#121212] text-[24px] font-bold leading-[28px]">
               {itemData.name}
@@ -106,8 +108,6 @@ export default function ItemModal() {
             </span>
           </div>
         </div>
-
-        {/* ModifierGroup */}
         {itemData.modifiers && (
           <ModifierGroup
             modifiers={itemData.modifiers}
@@ -126,14 +126,13 @@ export default function ItemModal() {
           <CTAButton
             itemId={itemData.id}
             itemName={itemData.name}
-            itemPrice={totalPrice} // Atualiza para passar o preço total
+            itemPrice={totalPrice}
             quantity={quantity}
-            buttonText={`Add To Order • £${totalPrice.toFixed(2)}`} // Usa totalPrice no texto do botão
+            buttonText={`Add To Order • £${totalPrice.toFixed(2)}`}
             redirectTo="/"
           />
-
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
