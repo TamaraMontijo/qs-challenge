@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# QS Challenge - Whitelabel Application for Restaurants
 
-## Getting Started
+[![Deployment](https://img.shields.io/badge/Deployed-Vercel-blue)](https://qs-challenge.vercel.app/)
 
-First, run the development server:
+## 📌 Overview
+QS Challenge is a **whitelabel application** built for restaurants, providing a seamless online ordering experience. This project was developed using **Next.js** and TypeScript, featuring a dynamic menu system with **Redux for state management** and **ShadCN/UI for UI components**.
 
-```bash
+🔗 [View the application](https://qs-challenge.vercel.app/)
+
+
+## **Getting Started**
+
+### ✅ **Prerequisites**
+- **Node.js** (>= 16.x)
+- **npm**, **yarn**, or **pnpm** (Package managers)
+
+### **Installation**
+Clone the repository and install dependencies:
+
+```sh
+git clone https://github.com/TamaraMontijo/qs-challenge.git
+cd qs-challenge
+npm install
+````
+
+
+## Running the Project  
+Start the development server:  
+
+```sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+````
+
+Open http://localhost:3000 in your browser.
+
+
+To create a production build:
+
+````
+npm run build
+`````
+
+Start the optimized production server:
 ```
+npm run start
+````
+___
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 📌  **Project Assumptions & Choices**
+. **State Management**: Used Redux Toolkit to handle the cart and menu state efficiently.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+. **Component Library**: ShadCN/UI was chosen for modern UI components and seamless integration.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+. **Styling**: Tailwind CSS allows rapid development and a consistent design system.
 
-## Learn More
+. **Folder Structure**: Modular and scalable, separating concerns like components, services, and store.
+___
 
-To learn more about Next.js, take a look at the following resources:
+### Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Next.js - React Framework for SSR & SSG
 
-## Deploy on Vercel
+TypeScript - Static typing for better maintainability
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Redux Toolkit - State management
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ShadCN/UI - UI components for a sleek design
+
+Tailwind CSS - Utility-first styling
+
+ESLint & Prettier - Code linting and formatting
+
+Vercel - Deployment
+
+___
+
+## 👩‍💻 About Me  
+
+Developed by **Tamara Montijo**.  
+Feel free to connect on [LinkedIn](https://www.linkedin.com/in/tamaramontijo/)!  
