@@ -1,16 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Tipagem para o produto
 type Product = {
   id: number;
   name: string;
   description: string;
   price: number;
   images?: { image: string }[];
-  modifiers?: any; // Tipar de acordo com sua necessidade
+  modifiers?: ModifierItem[]; 
 };
 
-// Tipagem do estado inicial
+interface ModifierItem {
+  id: number;
+  name: string;
+  price: number;
+  maxChoices: number;
+  position: number;
+  visible: number;
+  availabilityType: string; // Example: "AVAILABLE_NOW"
+  qty?: number; 
+  available: boolean;
+}
+
 type ProductState = {
   products: Product[];
   loading: boolean;

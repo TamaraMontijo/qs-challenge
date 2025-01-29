@@ -8,7 +8,7 @@ export const getMenuDetails = async () => {
     return response.data;
   } catch (error) {
     toast({
-        title: "Error",
+        title: `${error}`,
         description: "Failed to fetch menu details",
     });
   }

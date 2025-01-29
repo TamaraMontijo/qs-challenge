@@ -2,6 +2,7 @@
 import { getMenuDetails } from "@/services/menuService";
 import React, { useEffect, useState } from "react";
 import CarouselCard from "../layout/carouselCard";
+import { toast } from "@/hooks/use-toast";
 
 interface Section {
   id: number;
@@ -19,7 +20,10 @@ export default function Carousel() {
         const data = await getMenuDetails();
         setSections(data.sections || []);
       } catch (error) {
-        console.error("Error fetching menu details:", error);
+        toast({
+          title: `Error: ${error}`,
+          description: "Failed to fetch menu details",
+      });
       }
     }
     fetchMenuDetails();

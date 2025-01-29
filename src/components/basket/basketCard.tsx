@@ -2,17 +2,14 @@ import { useSelector, useDispatch } from "react-redux";
 import CounterButton from "../common/counterButton";
 import { RootState } from "@/store/store";
 import { clearBasket, removeItem } from "@/store/slice/basketSlice";
-import { Trash } from "lucide-react";
 import CTAButton from "../common/ctaButton";
 import { Modal } from "../common/modal";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 export default function BasketCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const basketItems = useSelector((state: RootState) => state.basket.items); // Pega os itens do estado global
+  const basketItems = useSelector((state: RootState) => state.basket.items); 
   const dispatch = useDispatch();
-  const router = useRouter()
 
   const calculateTotal = () => {
     return basketItems

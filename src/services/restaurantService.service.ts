@@ -8,7 +8,7 @@ export const getRestaurantDetails = async () => {
     return response.data;
   } catch (error) {
     toast({
-        title: "Error",
+        title: `Error: ${error}`,
         description: "Failed to fetch restaurant details",
     });
   }

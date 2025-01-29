@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Carousel from "./carousel";
 import MenuSection from "./menuSection";
 import { getMenuDetails } from "@/services/menuService";
+import { toast } from "@/hooks/use-toast";
 
 type MenuItem = {
     title: string;
@@ -38,7 +39,10 @@ export default function Menu() {
                 }));
                 setMenuData(transformedData);
             } catch (err) {
-                setError("Failed to load menu data.");
+                toast({
+                    title: `Error: ${err}`,
+                    description: "Error fetching theme",
+                });
             } finally {
                 setLoading(false);
             }

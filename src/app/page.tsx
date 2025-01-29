@@ -38,10 +38,10 @@ export default function Home() {
       {totalItems > 0 && (
         <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-center py-4 md:hidden">
         <CTAButton
-        itemId={0} // Pode ser qualquer valor, pois aqui o ID não é usado
+        itemId={0} 
         itemName="Basket"
-        itemPrice={totalPrice} // Total dinâmico dos itens no carrinho
-        quantity={totalItems} // Número total de itens
+        itemPrice={totalPrice} 
+        quantity={totalItems} 
         buttonText={`Your Basket • ${totalItems} item(s)`}
         onClick={toggleModal}
       />

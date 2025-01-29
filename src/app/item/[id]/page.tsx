@@ -44,9 +44,9 @@ export default function ItemModal() {
         setItemData(foundItem);
       } catch (error) {
         toast({
-          title: "Error",
+          title: `Error: ${error}`,
           description: "Failed to fetch item details",
-        });
+      });
       }
     };
 

@@ -1,5 +1,6 @@
 "use client"
 
+import { toast } from '@/hooks/use-toast';
 import { getRestaurantDetails } from '@/services/restaurantService.service';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -16,7 +17,10 @@ export default function BannerImage() {
             setBannerUrl(restaurantData.webSettings.bannerImage);
           }
         } catch (error) {
-          console.error('Error fetching restaurant details:', error);
+          toast({
+            title: `Error: ${error}`,
+            description: "Failed to fetch restaurant details",
+        });
         } finally {
           setLoading(false);
         }

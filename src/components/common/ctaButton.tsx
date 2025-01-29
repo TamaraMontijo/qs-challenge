@@ -1,18 +1,17 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation"; // Usado para redirecionar
-import { RootState } from "@/store/store";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 import { addItem } from "@/store/slice/basketSlice";
 
 interface CTAButtonProps {
-  itemId: number; // ID do item
-  itemName: string; // Nome do item
-  itemPrice: number; // Preço do item
-  quantity: number; // Quantidade selecionada
-  buttonText?: string; // Texto dinâmico do botão
-  redirectTo?: string; // Rota para redirecionar após clique
-  onClick?: () => void; // Função customizada ao clicar
+  itemId: number;
+  itemName: string;
+  itemPrice: number;
+  quantity: number;
+  buttonText?: string;
+  redirectTo?: string;
+  onClick?: () => void;
 }
 
 export default function CTAButton({
@@ -28,15 +27,14 @@ export default function CTAButton({
   const router = useRouter();
 
   const handleClick = () => {
-    if (onClick) {
-      // Executa a lógica customizada, se fornecida
+    if (onClick) { 
       onClick();
       return;
     }
-    // Adiciona o item ao carrinho com a quantidade selecionada
+
     dispatch(addItem({ id: itemId, name: itemName, price: itemPrice, quantity }));
 
-    // Redireciona para a página especificada, se fornecida
+
     if (redirectTo) {
       router.push(redirectTo);
     }

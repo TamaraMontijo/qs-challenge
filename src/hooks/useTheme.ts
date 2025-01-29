@@ -1,6 +1,7 @@
 // hooks/useTheme.ts
 import { getRestaurantDetails } from '@/services/restaurantService.service';
 import { useEffect, useState } from 'react';
+import { toast } from './use-toast';
 
 interface Theme {
   primaryColour: string;
@@ -25,7 +26,10 @@ export function useTheme() {
           navBackgroundColour: themeSettings.navBackgroundColour,
         });
       } catch (error) {
-        console.error('Error fetching theme:', error);
+        toast({
+          title: `Error: ${error}`,
+          description: "Error fetching theme",
+      });
       }
     }
 
