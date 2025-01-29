@@ -31,7 +31,16 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
-			}
+			},
+			keyframes: {
+				fadeInScale: {
+				  "0%": { opacity: '0', transform: "scale(0.95)" },
+				  "100%": { opacity: '1', transform: "scale(1)" },
+				},
+			  },
+			  animation: {
+				fadeInScale: "fadeInScale 0.3s ease-out",
+			  },
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

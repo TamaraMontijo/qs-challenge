@@ -1,7 +1,8 @@
-// utils/themeProvider.ts
 'use client';
+
 import { createContext, ReactNode, useContext } from 'react';
 import { useTheme } from '@/hooks/useTheme';
+import { Progress } from '@/components/ui/progress'; // Importa o componente Progress
 
 interface Theme {
   primaryColour: string;
@@ -23,7 +24,14 @@ interface ThemeProviderProps {
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const theme = useTheme();
 
-  if (!theme) return <div>Loading theme...</div>;
+  if (!theme) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+        <Progress className="w-1/2" value={50} /> {/* Barra de progresso animada */}
+        <p className="mt-4 text-gray-500 text-sm">Loading theme...</p>
+      </div>
+    );
+  }
 
   return (
     <ThemeContext.Provider value={{ theme }}>

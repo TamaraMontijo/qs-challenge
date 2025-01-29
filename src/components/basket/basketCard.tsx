@@ -1,12 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
 import CounterButton from "../common/counterButton";
 import { RootState } from "@/store/store";
-import { removeItem } from "@/store/slice/basketSlice";
+import { clearBasket, removeItem } from "@/store/slice/basketSlice";
 import { Trash } from "lucide-react";
+import CTAButton from "../common/ctaButton";
+import { Modal } from "../common/modal";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function BasketCard() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const basketItems = useSelector((state: RootState) => state.basket.items); // Pega os itens do estado global
   const dispatch = useDispatch();
+  const router = useRouter()
 
   const calculateTotal = () => {
     return basketItems
@@ -14,10 +20,22 @@ export default function BasketCard() {
       .toFixed(2);
   };
 
+  const totalItems = basketItems.reduce((acc, item) => acc + item.quantity, 0);
+  const totalPrice = basketItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  const toggleModal = () => {
+    if (!isModalOpen) {
+      setIsModalOpen(true);
+    } else {
+      setIsModalOpen(false);
+      dispatch(clearBasket());
+    }
+  };
+
   return (
-    <div className="basket-card flex flex-col p-0 gap-1 w-[320px] h-auto bg-[#F8F9FA] shadow-[0px_2px_14px_0px_#00000026] rounded-md">
+    <div className="basket-card flex flex-col p-0 gap-1 md:w-[320px] h-auto bg-[#F8F9FA] shadow-[0px_2px_14px_0px_#00000026] rounded-md">
       {/* Header */}
-      <div className="header flex flex-col justify-center p-4 w-full h-[64px] bg-[#F8F9FA] rounded-t-md">
+      <div className="header flex flex-col justify-center p-4 w-full h-[64px] bg-[#F8F9FA] rounded-t-md border-b-[1px] border-b-[#DADADA]">
         <h1 className="text-lg font-medium text-[#464646] tracking-wider">Basket</h1>
       </div>
 
@@ -46,7 +64,7 @@ export default function BasketCard() {
                 <div className="flex justify-between items-center gap-4 mt-2">
                   <CounterButton size="sm" itemId={item.id} itemName={item.name} itemPrice={item.price} />
                   <button
-                    onClick={() => dispatch(removeItem(item.id))} 
+                    onClick={() => dispatch(removeItem(item.id))}
                     className="text-red-500 text-sm"
                   >
                     Remove
@@ -69,6 +87,36 @@ export default function BasketCard() {
             </div>
           </div>
         </>
+      )}
+
+
+      {totalItems > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-center py-4 md:hidden">
+          <CTAButton
+            itemId={0} 
+            itemName="Basket"
+            itemPrice={totalPrice} 
+            quantity={totalItems} 
+            buttonText={`Checkout`}
+            onClick={toggleModal} 
+          />
+        </div>
+      )}
+
+      {/* Basket Modal */}
+      {isModalOpen && (
+        <Modal onClose={toggleModal}>
+          {isModalOpen && (
+            <Modal onClose={toggleModal}>
+              <div className="flex justify-center items-center h-full">
+                <p className="text-xl font-semibold text-primary animate-fadeInScale">
+                  Order placed successfully!
+                </p>
+              </div>
+            </Modal>
+          )}
+
+        </Modal>
       )}
     </div>
   );

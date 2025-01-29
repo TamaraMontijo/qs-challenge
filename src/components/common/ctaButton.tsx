@@ -12,6 +12,7 @@ interface CTAButtonProps {
   quantity: number; // Quantidade selecionada
   buttonText?: string; // Texto dinâmico do botão
   redirectTo?: string; // Rota para redirecionar após clique
+  onClick?: () => void; // Função customizada ao clicar
 }
 
 export default function CTAButton({
@@ -21,11 +22,17 @@ export default function CTAButton({
   quantity,
   buttonText = "Add To Cart",
   redirectTo,
+  onClick,
 }: CTAButtonProps) {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const handleClick = () => {
+    if (onClick) {
+      // Executa a lógica customizada, se fornecida
+      onClick();
+      return;
+    }
     // Adiciona o item ao carrinho com a quantidade selecionada
     dispatch(addItem({ id: itemId, name: itemName, price: itemPrice, quantity }));
 

@@ -21,7 +21,7 @@ const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
-    // Adicionar um item ao carrinho
+   
     addItem: (state, action: PayloadAction<BasketItem>) => {
       const existingItem = state.items.find(item => item.id === action.payload.id);
 
@@ -31,11 +31,11 @@ const basketSlice = createSlice({
         state.items.push(action.payload);
       }
     },
-    // Remover um item do carrinho
+ 
     removeItem: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter(item => item.id !== action.payload);
     },
-    // Alterar a quantidade de um item
+
     updateQuantity: (state, action: PayloadAction<{ id: number; quantity: number }>) => {
       const item = state.items.find(item => item.id === action.payload.id);
       if (item) {
@@ -43,7 +43,7 @@ const basketSlice = createSlice({
         item.quantity = action.payload.quantity;
       }
     },
-    // Limpar o carrinho
+
     clearBasket: (state) => {
       state.items = [];
     },

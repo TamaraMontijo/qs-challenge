@@ -54,7 +54,11 @@ export default function ItemModal() {
   }, [itemId]);
 
   if (!itemData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-50">
+        <p className="mt-4 text-gray-500 text-sm">Loading item details...</p>
+      </div>
+    );
   }
 
   const basePrice = itemData.price;
@@ -66,7 +70,7 @@ export default function ItemModal() {
       <div className="relative w-full md:max-w-[600px] bg-white shadow-lg">
         <button
           className="absolute top-4 right-4 w-[28px] h-[28px] bg-white shadow-md rounded-full flex justify-center items-center"
-          onClick={() => router.push("/")} 
+          onClick={() => router.push("/")}
         >
           <svg
             width="12"
@@ -122,11 +126,12 @@ export default function ItemModal() {
           <CTAButton
             itemId={itemData.id}
             itemName={itemData.name}
-            itemPrice={itemData.price}
-            quantity={quantity} 
-            buttonText={`Add To Order • £${(itemData.price * quantity).toFixed(2)}`}
-            redirectTo="/" 
+            itemPrice={totalPrice} // Atualiza para passar o preço total
+            quantity={quantity}
+            buttonText={`Add To Order • £${totalPrice.toFixed(2)}`} // Usa totalPrice no texto do botão
+            redirectTo="/"
           />
+
         </div>
       </div>
     </div>
