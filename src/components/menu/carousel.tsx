@@ -35,7 +35,7 @@ export default function Carousel({ onSectionSelect }: CarouselProps) {
 
   const handleCardClick = (id: number, name: string) => {
     setSelectedSection(id);
-    onSectionSelect(name); // 🔥 Agora chamamos a função para rolar até a seção correspondente!
+    onSectionSelect(name); 
   };
 
   return (
@@ -46,7 +46,7 @@ export default function Carousel({ onSectionSelect }: CarouselProps) {
           image={section.images[0]?.image || "/placeholder.png"}
           name={section.name}
           isSelected={selectedSection === section.id}
-          onClick={() => handleCardClick(section.id, section.name)} // 👈 Passamos o nome também!
+          onClick={() => handleCardClick(section.id, section.name)} 
         />
       ))}
     </div>

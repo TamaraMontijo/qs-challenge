@@ -1,4 +1,3 @@
-// hooks/useTheme.ts
 import { getRestaurantDetails } from '@/services/restaurantService.service';
 import { useEffect, useState } from 'react';
 import { toast } from './use-toast';

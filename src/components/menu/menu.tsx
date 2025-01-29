@@ -4,7 +4,7 @@ import MenuSection from "./menuSection";
 import { getMenuDetails } from "@/services/menuService";
 import { toast } from "@/hooks/use-toast";
 
-// Definir a interface `MenuSectionData` antes do uso
+
 type MenuItem = {
     title: string;
     description: string;
@@ -60,13 +60,12 @@ export default function Menu({ sectionRefs, scrollToSection, searchValue }: Menu
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
-    // 🔍 Filtrar os itens do menu
     const filteredMenuData = menuData.map((section) => ({
         sectionTitle: section.sectionTitle,
         items: section.items.filter((item) =>
             item.title.toLowerCase().includes(searchValue.toLowerCase())
         ),
-    })).filter(section => section.items.length > 0); // Remove seções vazias
+    })).filter(section => section.items.length > 0); 
 
     return (
         <div className="menu bg-white shadow-[0_2px_14px_0px_#00000024] w-full">

@@ -2,7 +2,7 @@
 
 import { createContext, ReactNode, useContext } from 'react';
 import { useTheme } from '@/hooks/useTheme';
-import { Progress } from '@/components/ui/progress'; // Importa o componente Progress
+import { Progress } from '@/components/ui/progress';
 
 interface Theme {
   primaryColour: string;

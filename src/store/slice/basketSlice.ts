@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Tipagem do item no carrinho
 type BasketItem = {
   id: number;
   name: string;
@@ -8,7 +7,6 @@ type BasketItem = {
   quantity: number;
 };
 
-// Tipagem do estado inicial
 type BasketState = {
   items: BasketItem[];
 };
@@ -50,6 +48,5 @@ const basketSlice = createSlice({
   },
 });
 
-// Exportar as actions e o reducer
 export const { addItem, removeItem, updateQuantity, clearBasket } = basketSlice.actions;
 export const basketReducer = basketSlice.reducer;

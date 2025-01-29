@@ -8,11 +8,11 @@ import { addItem, updateQuantity } from "@/store/slice/basketSlice";
 
 interface CounterButtonProps {
   size?: "sm" | "md";
-  itemId: number; // ID do item
-  itemName: string; // Nome do item
-  itemPrice: number; // Preço do item
-  useLocalState?: boolean; // Define se o contador usa estado local ou Redux
-  onQuantityChange?: (quantity: number) => void; // Callback para retornar a quantidade no estado local
+  itemId: number;
+  itemName: string;
+  itemPrice: number; 
+  useLocalState?: boolean; 
+  onQuantityChange?: (quantity: number) => void;
 }
 
 export default function CounterButton({
@@ -25,10 +25,9 @@ export default function CounterButton({
 }: CounterButtonProps) {
   const dispatch = useDispatch();
 
-  // Estado local, usado quando `useLocalState` é `true`
+
   const [localQuantity, setLocalQuantity] = useState(1);
 
-  // Estado do Redux, usado quando `useLocalState` é `false`
   const item = useSelector((state: RootState) =>
     state.basket.items.find((item) => item.id === itemId)
   );
@@ -38,12 +37,12 @@ export default function CounterButton({
     if (useLocalState) {
       const newQuantity = localQuantity + 1;
       setLocalQuantity(newQuantity);
-      onQuantityChange?.(newQuantity); // Notifica o componente pai
+      onQuantityChange?.(newQuantity); 
     } else if (item) {
-      // Atualiza quantidade no Redux
+
       dispatch(updateQuantity({ id: itemId, quantity: quantity + 1 }));
     } else {
-      // Adiciona o item ao carrinho com quantidade 1
+
       dispatch(addItem({ id: itemId, name: itemName, price: itemPrice, quantity: 1 }));
     }
   };
@@ -53,7 +52,7 @@ export default function CounterButton({
       if (localQuantity > 1) {
         const newQuantity = localQuantity - 1;
         setLocalQuantity(newQuantity);
-        onQuantityChange?.(newQuantity); // Notifica o componente pai
+        onQuantityChange?.(newQuantity); 
       }
     } else if (quantity > 1) {
       dispatch(updateQuantity({ id: itemId, quantity: quantity - 1 }));
@@ -71,7 +70,7 @@ export default function CounterButton({
         isSmall ? "w-[94px] h-[36px] rounded-md p-2 gap-4" : "w-[143px] h-[32px] rounded-lg"
       )}
     >
-      {/* Botão Decrementar */}
+
       <button
         onClick={decrement}
         disabled={quantity <= 0}
@@ -90,7 +89,6 @@ export default function CounterButton({
         />
       </button>
 
-      {/* Quantidade */}
       <div
         className={cn(
           "absolute left-[33.57%] right-[33.57%] top-[21.88%] bottom-[19.66%] font-semibold text-[#121212] flex items-center justify-center",
@@ -100,7 +98,7 @@ export default function CounterButton({
         {quantity}
       </div>
 
-      {/* Botão Incrementar */}
+
       <button
         onClick={increment}
         className={cn(

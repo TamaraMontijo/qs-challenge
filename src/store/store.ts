@@ -8,6 +8,5 @@ export const store = configureStore({
   },
 });
 
-// Tipos globais para o Redux
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

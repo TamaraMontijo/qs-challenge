@@ -1,9 +1,8 @@
-"use client"; // Este componente é explicitamente client-side
+"use client"; 
 
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
 
-// Um simples wrapper para Redux Provider
 export default function ReduxProvider({
   children,
 }: {

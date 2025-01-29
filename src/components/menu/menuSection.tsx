@@ -12,7 +12,6 @@ interface MenuSectionProps {
     }[];
 }
 
-// Usamos `forwardRef` para permitir que o `Menu` controle o scroll
 const MenuSection = forwardRef<HTMLDivElement, MenuSectionProps>(({ sectionTitle, items }, ref) => {
     const [isOpen, setIsOpen] = useState(true);
     const [maxWidth, setMaxWidth] = useState<number | null>(null);

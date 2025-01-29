@@ -28,15 +28,13 @@ export function Header() {
                   className={`uppercase tracking-wide text-[20px] font-thin ${activeIndex === index ? "text-white" : "text-gray-300"
                     }`}
                   onClick={() => {
-                    setActiveIndex(index - 1); // Atualiza o índice ativo
+                    setActiveIndex(index - 1); 
                   }}
                 >
                   {item.name}
                 </a>
               </div>
             ))}
-
-            {/* Linha animada */}
             <span
               className="absolute bottom-0 h-[2px] bg-white transition-all duration-300"
               style={{

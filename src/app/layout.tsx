@@ -10,7 +10,6 @@ const roboto = Roboto({
   variable: '--font-roboto',
 });
 
-// Mantemos o metadata no Server Component
 export const metadata: Metadata = {
   title: "QuikServe Frontend Challenge",
   description: "whitelabel application for restaurants",
