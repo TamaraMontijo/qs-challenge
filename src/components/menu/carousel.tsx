@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { getMenuDetails } from "@/services/menuService";
 import React, { useEffect, useState } from "react";
 import CarouselCard from "../layout/carouselCard";
@@ -10,7 +10,11 @@ interface Section {
   images: { image: string }[];
 }
 
-export default function Carousel() {
+interface CarouselProps {
+  onSectionSelect: (sectionTitle: string) => void;
+}
+
+export default function Carousel({ onSectionSelect }: CarouselProps) {
   const [sections, setSections] = useState<Section[]>([]);
   const [selectedSection, setSelectedSection] = useState<number | null>(null);
 
@@ -23,14 +27,15 @@ export default function Carousel() {
         toast({
           title: `Error: ${error}`,
           description: "Failed to fetch menu details",
-      });
+        });
       }
     }
     fetchMenuDetails();
   }, []);
 
-  const handleCardClick = (id: number) => {
+  const handleCardClick = (id: number, name: string) => {
     setSelectedSection(id);
+    onSectionSelect(name); // 🔥 Agora chamamos a função para rolar até a seção correspondente!
   };
 
   return (
@@ -41,7 +46,7 @@ export default function Carousel() {
           image={section.images[0]?.image || "/placeholder.png"}
           name={section.name}
           isSelected={selectedSection === section.id}
-          onClick={() => handleCardClick(section.id)}
+          onClick={() => handleCardClick(section.id, section.name)} // 👈 Passamos o nome também!
         />
       ))}
     </div>
